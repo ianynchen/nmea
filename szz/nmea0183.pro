@@ -18,7 +18,9 @@ TEMPLATE = app
 SOURCES += main.cpp \
     NmeaCodecManager.cpp \
     GGANmeaCodec.cpp \
-    util.cpp
+    util.cpp \
+    RMCNmeaCodec.cpp \
+    sentence.cpp
 
 HEADERS += \
     AbstractNmeaCodec.h \
@@ -27,4 +29,6 @@ HEADERS += \
     GGANmeaObject.h \
     RMCNmeaObject.h \
     GGANmeaCodec.h \
-    util.h
+    util.h \
+    RMCNmeaCodec.h \
+    sentence.h

@@ -1,14 +1,22 @@
 #ifndef GGANMEACODEC_H
 #define GGANMEACODEC_H
+#include "util.h"
 #include "GGANmeaObject.h"
 #include "AbstractNmeaCodec.h"
-class GGANmeaCodec : public AbstractNmeaCodec
-{
-public:
-    GGANmeaCodec();
-    GGANmeaObject* decode(char*);
-    //std::vector<std::string> encode(GGANmeaObject*);
-    std::string name();
-};
+namespace nmea{
+namespace codec{
+    class GGANmeaCodec : public AbstractNmeaCodec
+    {
+    private:
+        GGANmeaObject *GGAo;
+    public:
+        GGANmeaCodec();
+        ~GGANmeaCodec();
+        GGANmeaObject* decode(vector<string> v);
+        //std::vector<std::string> encode(GGANmeaObject*);
+        std::string name();
+    };
+}
+}
 
 #endif // GGANMEACODEC_H

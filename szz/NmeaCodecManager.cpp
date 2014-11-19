@@ -1,18 +1,25 @@
 #include "NmeaCodecManager.h"
-//AbstractNmeaObject* NmeaCodecManager::decode(char*) {
-  // append 方法负责分句、清除无效字符串
-  //std::vector<std::string> rawSentences = buffer.append(p);
-//    foreach(std::string sentence in rawSentences) {
-//      std::vector<std::string> segments = getSegments(sentence);
-//      if (segments.size() > 0)
-//        codecs[segments[0]]->decode(segments);
-//        // 改变一下AbstractNmeaCodec的方式，让NmeaCodecManager负责缓存、断句、分段，并
-//        // 从第一个分段找到对应的codec，然后将分段交给codec去检查校验码、解析
-//    }
-//    std::vector<std::string> segments = getSegments(sentence);
-//    parse each segment to get object
-//  }
-//}
+using namespace nmea;
+using namespace codec;
+NmeaCodecManager::NmeaCodecManager()
+{
+    codecs["GPGGA"] = new GGANmeaCodec();
+    codecs["GPRMC"] = new RMCNmeaCodec();
+}
+
+NmeaCodecManager::~NmeaCodecManager()
+{
+    //delete
+}
+
+AbstractNmeaObject* NmeaCodecManager::decode(char* raw) {
+    string str = string(raw);
+    string pattern = ",";
+    vector<string> raw_vector;
+    raw_vector = split(str, pattern);
+
+    string id = raw_vector[0].substr(1,(raw_vector[0]).size()-1);
+    return codecs[id]->decode(raw_vector);
+}
 
 //std::vector<std::string> NmeaCodecManager::encode(AbstractNmeaObject*){}
-
