@@ -1,9 +1,17 @@
 #include <iostream>
 #include "NmeaCodecManager.h"
 #include "sentence.h"
+#include <thread>
 using namespace nmea;
 using namespace codec;
 using namespace sentence;
+vector<string> cache;
+void sentence_thread()
+{
+    //const vector<string> Cache;
+    nmea::sentence::sentence s= nmea::sentence::sentence();
+    s.cut(cache);
+}
 int main(int argc, char *argv[])
 {
     vector<string> sentences;
@@ -21,11 +29,9 @@ int main(int argc, char *argv[])
     cout << rmco->check << endl;
     delete ncm;
 
+    std::thread t(sentence_thread);
+    t.join();
 
-    //cache
-    const vector<string> Cache;
-    nmea::sentence::sentence s= nmea::sentence::sentence();
-    s.cut(Cache);
     std::cout << "test success" << std::endl;
     return 0;
 }

@@ -33,7 +33,6 @@ void nmea::sentence::sentence::cut(vector<string> sentences)
                 sentences.push_back(sentencebuf);
             }
         }
-
         //string sentencebuf = "";
     }
 }
