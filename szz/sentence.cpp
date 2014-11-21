@@ -1,10 +1,12 @@
 #include "sentence.h"
 #include <iostream>
 #include <string.h>
+
 #define MAX_BUF 65535
 using namespace std;
 using namespace nmea;
 using namespace sentence;
+#include <stdio.h>
 nmea::sentence::sentence::sentence()
 {
 }
@@ -37,7 +39,12 @@ void nmea::sentence::sentence::cut(vector<string> sentences)
     }
 }
 
-void nmea::sentence::sentence::validate()
+void nmea::sentence::sentence::validate(char * buf, char r[])
 {
-
+    char c = *(buf+0);
+    while(*(buf++))
+    {
+        c^=*(buf);
+    }
+    sprintf(r, "%X%X", c>>4, c&0x0F);
 }

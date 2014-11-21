@@ -12,7 +12,7 @@ namespace nmea{
         public:
             sentence();
             void cut(vector<string> sentences);
-            void validate();
+            void validate(char* buf, char r[]);
         };
     }
 }

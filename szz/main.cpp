@@ -22,15 +22,19 @@ int main(int argc, char *argv[])
     std::cout << "start test!" << std::endl;
     NmeaCodecManager *ncm = new NmeaCodecManager();
     GGANmeaObject* ggao = (GGANmeaObject*)ncm->decode(ggachar);
-    cout << ggao->id << endl;
-    cout << ggao->check << endl;
+    //cout << ggao->id << endl;
+    //cout << ggao->check << endl;
 
     RMCNmeaObject* rmco = (RMCNmeaObject*)ncm->decode(rmcchar);
-    cout << rmco->check << endl;
+    //cout << rmco->check << endl;
     delete ncm;
 
-    std::thread t(sentence_thread);
-    t.join();
+    //std::thread t(sentence_thread);
+    //t.join();
+    nmea::sentence::sentence s= nmea::sentence::sentence();
+    char r[2];
+    s.validate("GPRMC,085223.136,A,3957.6286,N,11619.2078,E,0.06,36.81,180908,,,A", r);
+    cout << (char*)r<< endl;
 
     std::cout << "test success" << std::endl;
     return 0;
